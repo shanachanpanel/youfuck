@@ -1,7 +1,7 @@
 function homePage() {
   $("#anime__winter").ready(() => {
     $.ajax({
-      url: `https://anime.kaedenoki.net/api/home`,
+      url: `https://otakudesu-zeta.vercel.app/api/home`,
       type: "GET",
       cors: true,
       secure: true,
@@ -90,7 +90,7 @@ $(".search__anime").on("click", () => {
       e.preventDefault();
       const query = $(".search__anime").val();
       $.ajax({
-        url: `https://anime.kaedenoki.net/api/search/${query}`,
+        url: `https://otakudesu-zeta.vercel.app/api/search/${query}`,
         success: (anime) => {
           const searchAnime = anime.search_results;
           if (!searchAnime) {
@@ -153,7 +153,7 @@ function detail(el) {
   $(".detail__anime").on("click", (e) => {
     e.preventDefault();
     $.ajax({
-      url: `https://anime.kaedenoki.net/api/anime/${animeId}`,
+      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/${animeId}`,
       success: (result) => {
         let eps = result.episode_list;
         let genre = [];
@@ -329,7 +329,7 @@ function stream(el) {
   let id = $(el).data("id");
   let epsid = id.slice(22);
   $.ajax({
-    url: `https://anime.kaedenoki.net/api/eps/${epsid}`,
+    url: `https://otakudesu-zeta.vercel.app/api/eps/${epsid}`,
     success: (eps) => {
       const epslist = eps;
       let downloadlist = epslist.quality;
