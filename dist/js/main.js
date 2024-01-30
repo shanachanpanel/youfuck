@@ -90,32 +90,32 @@ $(".search__anime").on("click", () => {
       e.preventDefault();
       const query = $(".search__anime").val();
       $.ajax({
-        url: `https://otakudesu-zeta.vercel.app/api/otakudesu/search/${query}`,
+        url: `https://otakudesu-zeta.vercel.app/api/otakudesu/search/${keyword}`,
         success: (anime) => {
-          const searchAnime = anime.search_results;
-          if (!searchAnime) {
+          const keywordAnime = anime.keyword_results;
+          if (!keywordAnime) {
             $("#anime__winter").html(`<div class="container anime__winter">
                                         <div class="row">
-                                          <h3 class="anime__header">Tidak ada pencarian : ${query} dalam bentuk apapun</h3>
+                                          <h3 class="anime__header">Tidak ada pencarian : ${keyword} dalam bentuk apapun</h3>
                                         </div>
-                                        <div class="row card__search">
+                                        <div class="row card__keyword">
                                         
                                         </div>
                                       </div>`);
           } else {
-            let card__search = "";
-            searchAnime.forEach((search_result) => {
-              card__search += CardSearch(search_result);
+            let card__keyword = "";
+            keywordAnime.forEach((keyword_result) => {
+              card__search += Cardkeyword(keyword_result);
             });
             $("#anime__winter").html(`<div class="container anime__winter">
                                       <div class="row">
-                                        <h3 class="anime__header">Hasil pencarian : ${query}</h3>
+                                        <h3 class="anime__header">Hasil pencarian : ${keyword}</h3>
                                       </div>
-                                      <div class="row card__search">
+                                      <div class="row card__keyword">
                                       
                                       </div>
                                     </div>`);
-            $(".card__search").html(card__search);
+            $(".card__keyword").html(card__keyword);
           }
         },
         error: (e) => {
@@ -126,21 +126,21 @@ $(".search__anime").on("click", () => {
   });
 });
 
-function CardSearch(search_result) {
+function Cardkeyword(keyword_result) {
   return `<div class="col">
             <div class="container">
-            <a href="#" onclick="detail(this)" data-id="${search_result.id}" class="card detail__anime">
-              <div class="status">${search_result.status}</div>
-              <div class="rating">${search_result.score}</div>
+            <a href="#" onclick="detail(this)" data-id="${keyword_result.id}" class="card detail__anime">
+              <div class="status">${keyword_result.status}</div>
+              <div class="rating">${keyword_result.score}</div>
               <div class="thumb">
                 <img
                   width="170"
                   height="169"
                   sizes="(max-width: 300px), 100vw"
-                  src="${search_result.thumb}"
-                  alt="${search_result.title}"
+                  src="${keyword_result.thumb}"
+                  alt="${keyword_result.title}"
                 />
-                <h2 class="judul">${search_result.title}</h2>
+                <h2 class="judul">${keyword_result.title}</h2>
               </div>
               </a>
               </div>
@@ -153,7 +153,7 @@ function detail(el) {
   $(".detail__anime").on("click", (e) => {
     e.preventDefault();
     $.ajax({
-      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/genre/${animeId}`,
+      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/genres/${animeId}`,
       success: (result) => {
         let eps = result.episode_list;
         let genre = [];
@@ -282,7 +282,7 @@ function batch(el) {
   let batchId = $(el).data("id");
   batchId = batchId.slice(28);
   $.ajax({
-    url: `https://otakudesu-anime-api.vercel.app/api/otakudesu/info/${batchId}`,
+    url: `https://otakudesu-anime-api.vercel.app/api/otakudesu/ongoing/${batchId}`,
     success: (batch) => {
       $(".listEps").hide();
       const batchlist = batch;
@@ -329,7 +329,7 @@ function stream(el) {
   let id = $(el).data("id");
   let epsid = id.slice(22);
   $.ajax({
-    url: `https://otakudesu-anime-api.vercel.app/api/episode/${epsid}`,
+    url: `https://otakudesu-anime-api.vercel.app/api/otakudesu/episode/${epsid}`,
     success: (eps) => {
       const epslist = eps;
       let downloadlist = epslist.quality;
