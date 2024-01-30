@@ -1,7 +1,7 @@
 function homePage() {
   $("#anime__winter").ready(() => {
     $.ajax({
-      url: `https://latipharkat-api.my.id/api/otakudesu/home`,
+      url: `https://latipharkat-api.my.id/api/otakudesu/home/`,
       type: "GET",
       cors: true,
       secure: true,
@@ -153,7 +153,7 @@ function detail(el) {
   $(".detail__anime").on("click", (e) => {
     e.preventDefault();
     $.ajax({
-      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/genres/${animeId}`,
+      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/anime/${animeId}`,
       success: (result) => {
         let eps = result.episode_list;
         let genre = [];
