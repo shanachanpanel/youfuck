@@ -1,7 +1,7 @@
 function homePage() {
   $("#anime__winter").ready(() => {
     $.ajax({
-      url: `https://nakanomikuapi.vercel.app/api/home`,
+      url: `https://latipharkat-api.my.id/api/otakudesu/home`,
       type: "GET",
       cors: true,
       secure: true,
@@ -90,7 +90,7 @@ $(".search__anime").on("click", () => {
       e.preventDefault();
       const query = $(".search__anime").val();
       $.ajax({
-        url: `https://otakudesu-zeta.vercel.app/api/search/${query}`,
+        url: `https://otakudesu-zeta.vercel.app/api/otakudesu/search/${query}`,
         success: (anime) => {
           const searchAnime = anime.search_results;
           if (!searchAnime) {
@@ -153,7 +153,7 @@ function detail(el) {
   $(".detail__anime").on("click", (e) => {
     e.preventDefault();
     $.ajax({
-      url: `https://otakudesu-zeta.vercel.app/api/otakudesul/genre/${animeId}`,
+      url: `https://otakudesu-zeta.vercel.app/api/otakudesu/genre/${animeId}`,
       success: (result) => {
         let eps = result.episode_list;
         let genre = [];
@@ -282,7 +282,7 @@ function batch(el) {
   let batchId = $(el).data("id");
   batchId = batchId.slice(28);
   $.ajax({
-    url: `https://otakudesu-anime-api.vercel.app/v1/batch/${batchId}`,
+    url: `https://otakudesu-anime-api.vercel.app/api/otakudesu/info/${batchId}`,
     success: (batch) => {
       $(".listEps").hide();
       const batchlist = batch;
@@ -329,7 +329,7 @@ function stream(el) {
   let id = $(el).data("id");
   let epsid = id.slice(22);
   $.ajax({
-    url: `https://otakudesu-anime-api.vercel.app/v1/episode/${epsid}`,
+    url: `https://otakudesu-anime-api.vercel.app/api/episode/${epsid}`,
     success: (eps) => {
       const epslist = eps;
       let downloadlist = epslist.quality;
